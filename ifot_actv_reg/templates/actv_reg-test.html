@@ -1,0 +1,91 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='js/ol.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" type="text/css">
+    <style>
+      .map {
+        height: 400px;
+        width: 600px;
+        display: inline-block;
+      }
+      .side-pane {
+        display: inline-block;
+        vertical-align: top;
+      }
+      .marker {
+          width: 65px;
+          height: 26px;
+          // border: 1px solid #088;
+          border-radius: 10px;
+          background-color: #FFF3;
+          text-align: center;
+          opacity: 1.0;
+      }
+      .marker-text {
+          display: inline-block;
+          color: #000F;
+      }
+      #timing_chart {
+          width: 600px;
+          height: 400px;
+      }
+      button {
+          display: block;
+      }
+    </style>
+    <script src="{{ url_for('static', filename='js/ol.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.3.1.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/actv_reg.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/chroma.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/Chart.bundle.js') }}"></script>
+    <title>Vehicle Average Speed Map Test</title>
+  </head>
+  <body>
+    <div class="container">
+        <form action="" method="post" novalidate>
+        <div class="row">
+            <div class="col-sm-2">{{ form.influx_ip.label }}</div>
+            <div class="col-sm-8">{{ form.influx_ip() }}</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">{{ form.model.label }}</div>
+            <div class="col-sm-8">{{ form.model() }}</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">{{ form.sensor_list.label }}</div>
+            <div class="col-sm-8">{{ form.sensor_list() }}</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">{{ form.start_date.label }}</div>
+            <div class="col-sm-8">
+                {{ form.start_date() }} {{ form.start_time() }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">{{ form.end_date.label }}</div>
+            <div class="col-sm-8">
+                {{ form.end_date() }} {{ form.end_time() }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">{{ form.split_count.label }}</div>
+            <div class="col-sm-8">{{ form.split_count() }}</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">{{ form.submit }}</div>
+        </div>
+        </form>
+    </div>
+    <script type="text/javascript">
+        map_params = {
+            marker_path : "{{url_for('static', filename='rsu.png')}}",
+        };
+        createMap(map_params);
+    </script>
+  </body>
+</html>
